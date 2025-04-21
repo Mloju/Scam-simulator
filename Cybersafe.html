@@ -85,7 +85,7 @@
   <div class="container">
     <h1>🎯 Scam Simulator</h1>
     <div id="welcome">
-      <p>Think you're scam-smart? Play this quick game to test your scam IQ and learn how scammers use psychology against you.</p>
+      <p> What better to test if you are scam smart? Play this quick game to learn how scammers use psychology against you.</p>
       <button class="start-btn" onclick="startGame()">Start Game</button>
     </div>
     <div class="question" id="question" style="display: none;"></div>
@@ -100,23 +100,23 @@
       {
         text: "🚨 Internship Opportunity: Congrats! You've been pre-selected for a paid remote internship. Just click this link to confirm within the next hour: http://internship-offer-fast.com",
         answers: [
-          { text: "Click the link right away", score: 0, feedback: "Oops! You fell for a **scarcity** tactic and urgency bias." },
-          { text: "Google the company name and check for reviews", score: 1, feedback: "Great move! You avoided a possible scam." },
-          { text: "Check if your university sent the email", score: 1, feedback: "Smart! Always verify with official sources." }
+          { text: "Click the link right away", score: 0, feedback: "Oops! You fell for a tatic called scarcity. Scarcity is a social engineering method of creating a false sense of urgency in oder to make a victim feel they must complete an action with a short period of time. Now that we know, let's not trip twice.  " },
+          { text: "Google the company name and check for reviews", score: 1, feedback: "Great move! You avoided a possible scam! " },
+          { text: "Check if your university sent the email", score: 1, feedback: "Smart! Always verify with official sources. It doesn't hurt yo verify" }
         ]
       },
       {
         text: "🎁 You've won a FREE $100 Gift Card! Complete our 30-second survey now: http://gift-survey-hurry.net",
         answers: [
-          { text: "Click to take the survey", score: 0, feedback: "Yikes! This is a common scam using a **liking** tactic." },
-          { text: "Look at the URL closely before clicking", score: 1, feedback: "Nice! You spotted the **fake URL**." },
-          { text: "Report it to your email provider", score: 1, feedback: "Awesome! Reporting helps protect others." }
+          { text: "Click to take the survey", score: 0, feedback: "Yikes! You feel for a tactic called liking. Liking in social engineering is a tactic where attacker camouflage themselves as friendly, trustworthy, and relatable to their target. This involves using charms and compliments. Now that we know, let's move carefully " },
+          { text: "Look at the URL closely before clicking", score: 1, feedback: "Nice! You spotted the fake URL, smart" },
+          { text: "Report it to your email provider", score: 1, feedback: "Awesome! Reporting helps protect others. You are never wrong protecting yourself and others" }
         ]
       },
       {
         text: "🔥 Massive Deals on Popular Brands! Up to 90% off Nike, Adidas, and more: http://cheap-fashion-online.store",
         answers: [
-          { text: "Click to grab the deals", score: 0, feedback: "Scam alert! This relies on the **scarcity** and **social proof** principles." },
+          { text: "Click to grab the deals", score: 0, feedback: "Scam alert! You fell for not just one tactic but two: scarcity and social proof principles. Social proof in social engineering is a tactic used by attackers where the victims are attracted through a bandwagon because individuals are more likely to comply with the request if others are also complying. We can't fall for this, Keep your eye out and be a smart owl" },
           { text: "Check the brand’s official site to compare", score: 1, feedback: "Perfect! Always check with the original source." },
           { text: "Verify if it's a known discount season", score: 1, feedback: "Smart thinking! Timing matters." }
         ]
@@ -124,7 +124,7 @@
       {
         text: "📩 URGENT: Your tuition payment is overdue. Avoid account hold by paying now: http://college-billing-support.co",
         answers: [
-          { text: "Click and pay right away", score: 0, feedback: "Not good! That urgency is a **manipulation tactic**." },
+          { text: "Click and pay right away", score: 0, feedback: "Not good! That urgency is a manipulation tactic where the attacker pose as an authoritative figure.It is never wrong to verify, better safe than sorry" },
           { text: "Log into your official college portal to verify", score: 1, feedback: "Well done! Always go directly to official sources." },
           { text: "Ask the financial aid office if they sent this", score: 1, feedback: "Smart move! Confirm with a trusted person." }
         ]
@@ -132,15 +132,15 @@
       {
         text: "🏆 You've been selected for a $5,000 AI scholarship! Apply before midnight here: http://ai-grant-winner.org",
         answers: [
-          { text: "Apply quickly before the deadline", score: 0, feedback: "Oops! Falling for the **scarcity** tactic again." },
-          { text: "Check if your school or department promoted it", score: 1, feedback: "Clever! Scholarships usually come from verified sources." },
+          { text: "Apply quickly before the deadline", score: 0, feedback: "Oops! Falling for the scarcity tactic again :( " },
+          { text: "Check if your school or department promoted it", score: 1, feedback: "Smart owl! Scholarships usually come from verified sources." },
           { text: "Search for other recipients or details online", score: 1, feedback: "Great thinking! Scams often have no online footprint." }
         ]
       },
       {
         text: "🤖 Try this new AI homework tool to write your essays in minutes: http://ez-essay-bot.ai",
         answers: [
-          { text: "Try it right away", score: 0, feedback: "Careful! It could be phishing or lead to academic issues." },
+          { text: "Try it right away", score: 0, feedback: "Careful! It could be phishing or lead to academic issues. We need our degree, be careful" },
           { text: "Check if your professor allows this", score: 1, feedback: "Good! Always follow your school's academic honesty rules." },
           { text: "Look up reviews and verify if it’s legit", score: 1, feedback: "Smart! Not all AI tools are trustworthy or safe." }
         ]
@@ -209,7 +209,7 @@ const wrongImageOptions = [
             } else {
               showScore();
             }
-          }, 2500);
+          }, 5000);
         };
         answersDiv.appendChild(btn);
       });
