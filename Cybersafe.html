@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scam Simulator</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #ffe4e1;
+      margin: 0;
+      padding: 20px;
+      background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff0f5;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 2px solid #ffb6c1;
+    }
+    h1 {
+      text-align: center;
+      color: #ff69b4;
+    }
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #db7093;
+    }
+    .answers button, .start-btn, .restart-btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #ffb6c1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+    .answers button:hover, .start-btn:hover, .restart-btn:hover {
+      background-color: #ff69b4;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #c71585;
+    }
+    .score-board {
+      margin-top: 30px;
+      background-color: #ffe4e1;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ffb6c1;
+    }
+    ol {
+      padding-left: 20px;
+    }
+    li {
+      color: #db7093;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .question, .feedback {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    #imageDisplay img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ffb6c1;
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Scam Simulator</h1>
+    <div id="welcome">
+      <p>Think you're scam-smart? Play this quick game to test your scam IQ and learn how scammers use psychology against you.</p>
+      <button class="start-btn" onclick="startGame()">Start Game</button>
+    </div>
+    <div class="question" id="question" style="display: none;"></div>
+    <div class="answers" id="answers"></div>
+    <div class="feedback" id="feedback"></div>
+    <div id="imageDisplay" style="text-align: center;"></div>
+    <div class="score-board" id="scoreBoard"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "🚨 Internship Opportunity: Congrats! You've been pre-selected for a paid remote internship. Just click this link to confirm within the next hour: http://internship-offer-fast.com",
+        answers: [
+          { text: "Click the link right away", score: 0, feedback: "Oops! You fell for a **scarcity** tactic and urgency bias." },
+          { text: "Google the company name and check for reviews", score: 1, feedback: "Great move! You avoided a possible scam." },
+          { text: "Check if your university sent the email", score: 1, feedback: "Smart! Always verify with official sources." }
+        ]
+      },
+      {
+        text: "🎁 You've won a FREE $100 Gift Card! Complete our 30-second survey now: http://gift-survey-hurry.net",
+        answers: [
+          { text: "Click to take the survey", score: 0, feedback: "Yikes! This is a common scam using a **liking** tactic." },
+          { text: "Look at the URL closely before clicking", score: 1, feedback: "Nice! You spotted the **fake URL**." },
+          { text: "Report it to your email provider", score: 1, feedback: "Awesome! Reporting helps protect others." }
+        ]
+      },
+      {
+        text: "🔥 Massive Deals on Popular Brands! Up to 90% off Nike, Adidas, and more: http://cheap-fashion-online.store",
+        answers: [
+          { text: "Click to grab the deals", score: 0, feedback: "Scam alert! This relies on the **scarcity** and **social proof** principles." },
+          { text: "Check the brand’s official site to compare", score: 1, feedback: "Perfect! Always check with the original source." },
+          { text: "Verify if it's a known discount season", score: 1, feedback: "Smart thinking! Timing matters." }
+        ]
+      },
+      {
+        text: "📩 URGENT: Your tuition payment is overdue. Avoid account hold by paying now: http://college-billing-support.co",
+        answers: [
+          { text: "Click and pay right away", score: 0, feedback: "Not good! That urgency is a **manipulation tactic**." },
+          { text: "Log into your official college portal to verify", score: 1, feedback: "Well done! Always go directly to official sources." },
+          { text: "Ask the financial aid office if they sent this", score: 1, feedback: "Smart move! Confirm with a trusted person." }
+        ]
+      },
+      {
+        text: "🏆 You've been selected for a $5,000 AI scholarship! Apply before midnight here: http://ai-grant-winner.org",
+        answers: [
+          { text: "Apply quickly before the deadline", score: 0, feedback: "Oops! Falling for the **scarcity** tactic again." },
+          { text: "Check if your school or department promoted it", score: 1, feedback: "Clever! Scholarships usually come from verified sources." },
+          { text: "Search for other recipients or details online", score: 1, feedback: "Great thinking! Scams often have no online footprint." }
+        ]
+      },
+      {
+        text: "🤖 Try this new AI homework tool to write your essays in minutes: http://ez-essay-bot.ai",
+        answers: [
+          { text: "Try it right away", score: 0, feedback: "Careful! It could be phishing or lead to academic issues." },
+          { text: "Check if your professor allows this", score: 1, feedback: "Good! Always follow your school's academic honesty rules." },
+          { text: "Look up reviews and verify if it’s legit", score: 1, feedback: "Smart! Not all AI tools are trustworthy or safe." }
+        ]
+      }
+    ];
+
+    const correctImageOptions = [
+  "IMG_1483.JPG", 
+  "IMG_1487.JPG", 
+  "IMG_1491.JPG", 
+  "IMG_1494.JPG", 
+  "IMG_1495.JPG",
+  "IMG_1488.JPG",
+  "IMG_1504.JPG",
+];
+
+const wrongImageOptions = [
+  "IMG_1485.JPG", 
+  "IMG_1489.JPG", 
+  "IMG_1490.JPG", 
+  "IMG_1493.JPG", 
+  "IMG_1496.JPG", 
+  "IMG_1497.JPG", 
+  "IMG_1498.JPG"
+];
+
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startGame() {
+      document.getElementById("welcome").style.display = "none";
+      document.getElementById("question").style.display = "block";
+      document.getElementById("scoreBoard").innerHTML = "";
+      currentQuestion = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      if (!question) return showScore();
+
+      document.getElementById("question").textContent = question.text;
+      const answersDiv = document.getElementById("answers");
+      answersDiv.innerHTML = "";
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("imageDisplay").innerHTML = "";
+
+      question.answers.forEach((answer) => {
+        const btn = document.createElement("button");
+        btn.textContent = answer.text;
+        btn.onclick = () => {
+          score += answer.score;
+          document.getElementById("feedback").textContent = answer.feedback;
+
+          const imageArray = answer.score === 1 ? correctImageOptions : wrongImageOptions;
+          const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
+          document.getElementById("imageDisplay").innerHTML =
+            `<img src="${randomImage}" alt="Feedback Image">`;
+
+          currentQuestion++;
+          setTimeout(() => {
+            if (currentQuestion < questions.length) {
+              showQuestion();
+            } else {
+              showScore();
+            }
+          }, 2500);
+        };
+        answersDiv.appendChild(btn);
+      });
+    }
+
+    function showScore() {
+      document.getElementById("question").textContent = `Game Over! Your Scam IQ Score: ${score}/${questions.length}`;
+      document.getElementById("answers").innerHTML = "";
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("imageDisplay").innerHTML = "";
+
+      const nickname = prompt("Enter a nickname for the leaderboard:");
+      if (nickname) {
+        const leaderboard = JSON.parse(localStorage.getItem("scamLeaderboard") || "[]");
+        leaderboard.push({ name: nickname, score });
+        leaderboard.sort((a, b) => b.score - a.score);
+        localStorage.setItem("scamLeaderboard", JSON.stringify(leaderboard));
+        renderLeaderboard();
+      }
+
+      const restartBtn = document.createElement("button");
+      restartBtn.textContent = "Play Again";
+      restartBtn.className = "restart-btn";
+      restartBtn.onclick = startGame;
+      document.getElementById("answers").appendChild(restartBtn);
+    }
+
+    function renderLeaderboard() {
+      const board = JSON.parse(localStorage.getItem("scamLeaderboard") || "[]");
+      const boardDiv = document.getElementById("scoreBoard");
+      boardDiv.innerHTML = "<h3>Leaderboard</h3><ol>" +
+        board.slice(0, 5).map(entry => `<li>${entry.name}: ${entry.score}</li>`).join("") +
+        "</ol>";
+    }
+  </script>
+</body>
+</html>
